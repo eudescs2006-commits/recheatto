@@ -1,0 +1,21 @@
+:root{
+  --bg:#1A1A1A;
+  --gold:#FFB703;
+  --card:#2A2A2A;
+  --muted:#E5E5E5;
+}
+*{box-sizing:border-box}
+body,html,#root{height:100%;margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:#fff}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:3px solid var(--gold)}
+.brand{font-weight:700;font-size:20px;color:var(--gold)}
+.links a{color:#fff;margin-left:14px;text-decoration:none}
+.main{padding:24px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;padding:24px}
+.card{background:var(--card);padding:12px;border-radius:12px}
+.btn{background:var(--gold);color:#111;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+.form{max-width:720px;margin:0 auto;padding:16px}
+.input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #444;background:#111;color:#fff}
+.progress{height:12px;background:#333;border-radius:8px;overflow:hidden}
+.progress > span{display:block;height:100%;background:var(--gold);width:0%}
+.footer{text-align:center;padding:16px;color:#aaa}
+.whatsapp-float{position:fixed;right:18px;bottom:18px;background:var(--gold);color:#111;padding:12px 14px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.4);text-decoration:none;font-weight:700}
