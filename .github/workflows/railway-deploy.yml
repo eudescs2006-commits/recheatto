@@ -11,22 +11,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 20
 
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
+      - name: Instalar dependências
+        working-directory: ./backend
+        run: npm install
 
-      - name: Deploy to Railway (Safe Confirmation)
+      - name: Build do backend
+        working-directory: ./backend
+        run: npm run build --if-present
+
+      - name: Iniciando deploy seguro...
+        run: echo "Iniciando deploy seguro..."
+
+      - name: Deploy para Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
+          if [ -z "$RAILWAY_TOKEN" ]; then
+            echo "❌ ERRO: Token da Railway não encontrado. Adicione em Settings > Secrets > Actions > Novo secret > Nome: RAILWAY_TOKEN"
+            exit 1
+          fi
+
+          echo "✅ Token encontrado. Conectando à Railway..."
+          npm install -g @railway/cli
           cd backend
-          echo "Iniciando deploy seguro..."
-          echo "Se for a primeira vez, confirme o serviço no painel da Railway."
-          railway up
+          railway up --service recheatto --ci
