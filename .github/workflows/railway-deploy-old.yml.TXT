@@ -1,4 +1,4 @@
-name: Deploy Backend to Railway
+name: Deploy Backend to Railway (Safe Mode)
 
 on:
   push:
@@ -21,9 +21,11 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
-      - name: Deploy to Railway
+      - name: Deploy to Railway (Safe Confirmation)
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
           cd backend
-          railway up --service "Recheatto Backend" --yes
+          echo "Iniciando deploy seguro..."
+          echo "Se for a primeira vez, confirme o serviço no painel da Railway."
+          railway up
